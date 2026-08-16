@@ -1,0 +1,33 @@
+{
+  "name": "cronlens",
+  "version": "1.0.0",
+  "description": "CronLens — Zero-dependency, offline browser cron expression visualizer & debugger. Real-time parse, weekly heatmap, next-run prediction, multi-language descriptions.",
+  "keywords": [
+    "cron",
+    "crontab",
+    "cron-expression",
+    "scheduler",
+    "visualizer",
+    "debugger",
+    "zero-dependency",
+    "offline",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "author": "gitstq",
+  "main": "js/cron-parser.js",
+  "scripts": {
+    "test": "node tests/run-tests.cjs",
+    "start": "python3 -m http.server 8080",
+    "serve": "npx serve ."
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "index.html",
+    "css",
+    "js",
+    "tests"
+  ]
+}

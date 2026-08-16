@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CronLens — Cron Expression Visualizer &amp; Debugger</title>
+  <meta name="description" content="CronLens — zero-dependency, offline browser cron expression visualizer & debugger. Real-time parse, weekly heatmap, next-run prediction, multi-language descriptions.">
+  <meta name="keywords" content="cron, crontab, cron expression, visualizer, debugger, scheduler, developer tools">
+  <meta property="og:title" content="CronLens — Cron Expression Visualizer &amp; Debugger">
+  <meta property="og:description" content="Zero-dependency, offline browser cron expression visualizer & debugger. Real-time parse, weekly heatmap, next-run prediction, multi-language descriptions.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2322d3ee'/%3E%3Ctext x='50' y='68' font-size='52' font-family='monospace' font-weight='800' text-anchor='middle' fill='%2304121a'%3E*%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">*</div>
+      <div>
+        <div class="brand-name">CronLens</div>
+        <div class="brand-tag" id="brand-tag">Cron expression visualizer &amp; debugger</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="zh-CN">简</button>
+        <button type="button" data-lang="zh-TW">繁</button>
+      </div>
+      <button class="icon-btn" id="btn-theme" type="button" aria-label="Toggle theme" title="Toggle theme">
+        <span id="theme-icon"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-eyebrow"><span class="dot"></span> Local-first · Zero-dependency · Offline</div>
+      <h1>See your <span class="accent">cron</span> at a glance.</h1>
+      <p>Type a cron expression and watch it come alive: a human-readable description, the next run times, a weekly heatmap and a monthly calendar. Everything runs in your browser.</p>
+
+      <div class="expression-card">
+        <div class="expression-row">
+          <div class="expr-input-wrap">
+            <input id="expr-input" class="expr-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" value="0 9 * * 1-5" aria-label="Cron expression">
+            <span id="status-badge" class="status-badge"></span>
+          </div>
+          <div class="expr-actions">
+            <button class="btn" id="btn-copy" type="button"></button>
+            <button class="btn" id="btn-share" type="button"></button>
+            <button class="btn" id="btn-reset" type="button"></button>
+          </div>
+        </div>
+        <div id="status-line" class="status-line"></div>
+
+        <div class="field-breakdown" id="field-breakdown" aria-label="Field breakdown">
+          <div class="field" data-field="second"><div class="field-label">Second</div><div class="field-value">*</div></div>
+          <div class="field" data-field="minute"><div class="field-label">Minute</div><div class="field-value">0</div></div>
+          <div class="field" data-field="hour"><div class="field-label">Hour</div><div class="field-value">9</div></div>
+          <div class="field" data-field="dom"><div class="field-label">Day of month</div><div class="field-value">*</div></div>
+          <div class="field" data-field="month"><div class="field-label">Month</div><div class="field-value">*</div></div>
+          <div class="field" data-field="dow"><div class="field-label">Day of week</div><div class="field-value">1-5</div></div>
+        </div>
+      </div>
+
+      <div class="description-card">
+        <div class="desc-label" id="desc-label">Description</div>
+        <div class="desc-text" id="desc-text">—</div>
+      </div>
+
+      <div class="presets-section">
+        <div class="section-label" id="presets-label">Presets</div>
+        <div class="preset-chips" id="preset-chips"></div>
+      </div>
+    </section>
+
+    <section class="main-grid">
+      <div class="panel">
+        <div class="panel-title" id="next-title">Next run times</div>
+        <div class="next-runs" id="next-runs"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title" id="heat-title">Weekly schedule</div>
+        <div class="heatmap-wrap">
+          <div class="heatmap" id="heatmap"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title" id="cal-title">Monthly calendar</div>
+        <div class="calendar-nav">
+          <button class="cal-nav-btn" id="cal-prev" type="button" aria-label="Previous month">‹</button>
+          <span class="cal-title" id="cal-title-text"></span>
+          <button class="cal-nav-btn" id="cal-next" type="button" aria-label="Next month">›</button>
+        </div>
+        <div class="calendar" id="calendar">
+          <div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div>
+          <div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div>
+          <div class="cal-dow">Sun</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div id="footer-note">Runs fully in your browser. No data leaves your device.</div>
+    <div id="footer-note-2" style="margin-top:4px;font-size:12px;">Link is in the address bar</div>
+    <div style="margin-top:8px;">
+      <a href="https://github.com/gitstq/cronlens" target="_blank" rel="noopener">GitHub</a>
+      &nbsp;·&nbsp; MIT License
+    </div>
+  </footer>
+
+  <script src="js/cron-parser.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/presets.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
